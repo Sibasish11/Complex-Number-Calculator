@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Complex Number Calculator</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            margin-left: 48px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+
+
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            margin-left: -10px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #7E57C2;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #9575CD;
+        }
+
+        .result-box {
+            background-color: #1E2130;
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            margin-left: -95px;
+            margin-right: auto;
+            width: 80%;
+
+        }
+
+        h2 {
+            margin-left: -87px;
+        }
+
+        h21 {
+            margin-right: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #plot {
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+            margin-left: -94px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Complex Number Calculator</h1>
+    <div class="container">
+        <div class="input-container column">
+            <h21>Input</h21>
+            <div class="input-group">
+                <h3>First complex number (z₁)</h3>
+                <label for="real1">Real part:</label>
+                <input type="number" id="real1" value="1" step="0.1">
+                <label for="imag1">Imaginary part:</label>
+                <input type="number" id="imag1" value="1" step="0.1">
+            </div>
+
+            <div class="input-group">
+                <h3>Second complex number (z₂)</h3>
+                <label for="real2">Real part:</label>
+                <input type="number" id="real2" value="0.5" step="0.1">
+                <label for="imag2">Imaginary part:</label>
+                <input type="number" id="imag2" value="-0.5" step="0.1">
+            </div>
+
+            <div class="input-group">
+                <h3>Operation</h3>
+                <select id="operation">
+                    <option value="add">Addition</option>
+                    <option value="subtract">Subtraction</option>
+                    <option value="multiply">Multiplication</option>
+                    <option value="divide">Division</option>
+                </select>
+                <button onclick="calculate()">Calculate</button>
+            </div>
+        </div>
+
+        <div class="result-container column">
+            <h2>Results</h2>
+            <div class="result-box" id="result">
+                Select an operation and click Calculate
+            </div>
+            <div id="plot" style="width:100%; height:400px;"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function add(z1, z2) {
+            return { real: z1.real + z2.real, imag: z1.imag + z2.imag };
+        }
+
+        function subtract(z1, z2) {
+            return { real: z1.real - z2.real, imag: z1.imag - z2.imag };
+        }
+
+        function multiply(z1, z2) {
+            return {
+                real: z1.real * z2.real - z1.imag * z2.imag,
+                imag: z1.real * z2.imag + z1.imag * z2.real
+            };
+        }
+
+        function divide(z1, z2) {
+            const denominator = z2.real * z2.real + z2.imag * z2.imag;
+            if (denominator === 0) {
+                throw new Error("Division by zero");
+            }
+            return {
+                real: (z1.real * z2.real + z1.imag * z2.imag) / denominator,
+                imag: (z1.imag * z2.real - z1.real * z2.imag) / denominator
+            };
+        }
+
+
+        function complexToString(z) {
+            if (z.real === 0 && z.imag === 0) return "0";
+            if (z.real === 0) return z.imag.toFixed(2) + "i";
+            if (z.imag === 0) return z.real.toFixed(2);
+
+            const sign = z.imag > 0 ? "+" : "-";
+            return `${z.real.toFixed(2)} ${sign} ${Math.abs(z.imag).toFixed(2)}i`;
+        }
+
+
+        function calculate() {
+            const real1 = parseFloat(document.getElementById("real1").value);
+            const imag1 = parseFloat(document.getElementById("imag1").value);
+            const real2 = parseFloat(document.getElementById("real2").value);
+            const imag2 = parseFloat(document.getElementById("imag2").value);
+            const operation = document.getElementById("operation").value;
+
+            const z1 = { real: real1, imag: imag1 };
+            const z2 = { real: real2, imag: imag2 };
+
+            let result;
+            let opSymbol;
+
+            try {
+                switch (operation) {
+                    case "add":
+                        result = add(z1, z2);
+                        opSymbol = "+";
+                        break;
+                    case "subtract":
+                        result = subtract(z1, z2);
+                        opSymbol = "-";
+                        break;
+                    case "multiply":
+                        result = multiply(z1, z2);
+                        opSymbol = "×";
+                        break;
+                    case "divide":
+                        result = divide(z1, z2);
+                        opSymbol = "÷";
+                        break;
+                }
+
+                document.getElementById("result").innerHTML = `
+                    <h3>${complexToString(z1)} ${opSymbol} ${complexToString(z2)}</h3>
+                    <h3>= ${complexToString(result)}</h3>
+                `;
+
+
+                createPlot(z1, z2, result);
+
+            } catch (error) {
+                document.getElementById("result").innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+
+
+        function createPlot(z1, z2, result) {
+            const data = [
+                {
+                    x: [0, z1.real],
+                    y: [0, z1.imag],
+                    mode: 'lines+markers',
+                    name: 'z₁',
+                    line: { color: 'blue', width: 3 }
+                },
+                {
+                    x: [0, z2.real],
+                    y: [0, z2.imag],
+                    mode: 'lines+markers',
+                    name: 'z₂',
+                    line: { color: 'red', width: 3 }
+                },
+                {
+                    x: [0, result.real],
+                    y: [0, result.imag],
+                    mode: 'lines+markers',
+                    name: 'Result',
+                    line: { color: 'green', width: 3 }
+                }
+            ];
+
+            const layout = {
+                title: 'Argand Diagram',
+                paper_bgcolor: '#1E2130',
+                plot_bgcolor: '#1E2130',
+                font: { color: 'white' },
+                xaxis: {
+                    title: 'Real',
+                    zeroline: true,
+                    zerolinecolor: 'gray',
+                    gridcolor: 'rgba(255,255,255,0.1)'
+                },
+                yaxis: {
+                    title: 'Imaginary',
+                    zeroline: true,
+                    zerolinecolor: 'gray',
+                    gridcolor: 'rgba(255,255,255,0.1)',
+                    scaleanchor: 'x',
+                    scaleratio: 1
+                }
+            };
+
+            Plotly.newPlot('plot', data, layout);
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            createPlot({ real: 1, imag: 1 }, { real: 0.5, imag: -0.5 }, { real: 1.5, imag: 0.5 });
+        });
+    </script>
+</body>
+
+</html>
