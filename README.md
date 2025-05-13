@@ -14,7 +14,7 @@ A modern web browser (Chrome, Firefox, Safari, etc.)
 
 Installation
 
-Clone the repository:git clone https://github.com/your-username/complex-number-calculator.git
+Clone the repository:git clone https://github.com/Sibasish11/complex-number-calculator.git
 
 
 Navigate to the project directory:cd complex-number-calculator
