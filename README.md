@@ -46,5 +46,5 @@ Built for calculations like these are just few clicks away.
 Inspired by the need for a simple yet powerful complex number calculator.
 
 
-⭐ Star this repo if you find it useful!📩 Reach out for questions or suggestions via your-email@example.com.
-
+⭐ Star this repo if you find it useful!📩 Reach out for questions or suggestions via 
+www.linkedin.com/in/sibasish-padhihari-537204310
