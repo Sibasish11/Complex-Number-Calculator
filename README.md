@@ -6,6 +6,17 @@ This is a full-stack TypeScript application that implements a complex number cal
 
 ## Screenshots 📸
 
+### 1. Initial UI Load
+![Initial UI](./assets/Screenshot%202025-07-08%20184319.png)
+
+### 2. User Input Section
+![User Input](./assets/Screenshot%202025-07-08%20184340.png)
+
+### 3. Result Display Section
+![Result Display](./assets/Screenshot%202025-07-08%20184403.png)
+
+### 4. Final View with Output
+![Final Output](./assets/Screenshot%202025-07-08%20193210.png)
 
 
 ## System Architecture 🛠️
