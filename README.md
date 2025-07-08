@@ -6,10 +6,7 @@ This is a full-stack TypeScript application that implements a complex number cal
 
 ## Screenshots 📸
 
-![Result 1.1 + 0.3i](https://via.placeholder.com/300x200.png?text=Result+1.1+%2B+0.3i)
-![Result 6 + 4i](https://via.placeholder.com/300x200.png?text=Result+6+%2B+4i)
-![Complex Number Calculator Interface](https://via.placeholder.com/300x200.png?text=Complex+Number+Calculator)
-![Project Structure in VSCode](https://via.placeholder.com/300x200.png?text=Project+Structure)
+
 
 ## System Architecture 🛠️
 
