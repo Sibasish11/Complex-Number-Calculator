@@ -2,7 +2,7 @@
 
 ## Overview 📋
 
-This is a full-stack TypeScript application that implements a complex number calculator with a React frontend and Express backend. The application is built using modern web technologies with a focus on clean architecture and developer experience. 🚀
+This is a full-stack TypeScript and JavaScript application that implements a complex number calculator with a React frontend and Express backend. The application is built using modern web technologies with a focus on clean architecture and developer experience. 🚀
 
 ## Screenshots 📸
 
@@ -85,7 +85,7 @@ This is a full-stack TypeScript application that implements a complex number cal
 
 ### Third-party Services 🌐
 - **Neon Database**: Serverless PostgreSQL hosting 🗄️
-- **Replit**: Development environment with specialized plugins 💻
+
 
 ## Deployment Strategy 🚀
 
